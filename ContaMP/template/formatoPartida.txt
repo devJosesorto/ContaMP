@@ -1,0 +1,3 @@
+/****** PARTIDA $tipopar $numPartida ******/
+INSERT [PHDATA_SBA].[dbo].[Partidas] ([TipoPar], [Numero], [Concepto], [fecha], [salfec], [Cerrado], [Generado], [Impreso], [user_modif], [fecha_modif], [codempre], [numdoc], [codcliente], [operacion], [codctabanco], [codoperbanco], [ban_numdoc], [TasaAlterna], [MonedaAlterna], [usrCreo], [fechaUserCreo], [userCreo]) 
+VALUES (N'$tipopar', N'$numPartida', N'$detallePartida', CAST(N'$detalleFecha' AS Date), N'$salFecha', 0, 0, 0, N'', NULL, NULL, NULL, NULL, -1, NULL, NULL, NULL, 1, N'USD', N'Sorto', CAST(N'$fechacreacion 12:00:00.00' AS DateTime), NULL)

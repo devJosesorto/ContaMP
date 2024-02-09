@@ -1,0 +1,3 @@
+/****** PARTIDA DE DETALLE $tipopar $numPartida******/
+INSERT [PHDATA_SBA].[dbo].[DetaPart] ([salfec], [tipopar], [numero], [cuenta], [ccosto], [ccosto2], [ccosto3], [detalle], [cargo], [abono], [tipomov], [fecha], [codempre], [codctabanco2], [codOperBanco2], [numdoc2], [moneda2], [tasacambio], [montoconvert], [tipo_ope2], [Tipodoc], [numdoc], [codcliente], [operacion], [CargoM2], [AbonoM2]) 
+VALUES (N'$salFecha', N'$tipopar', N'$numPartida', N'$cuenta', N'', N'', N'', N'$detallePartida', CAST($cargo AS Decimal(18, 2)), CAST($abono AS Decimal(18, 2)), $movimiento, CAST(N'$detalleFecha 00:00:00.000' AS DateTime), NULL, N'', N'', N'', N'', 0, 0, 0, NULL, NULL, NULL, -1, 0, 0)

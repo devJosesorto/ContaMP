@@ -1,0 +1,24 @@
+  /****** DETALLE SALDOS $tipopar $numPartida PASIVO/INGRESO ******/
+  IF EXISTS (SELECT a.cuenta
+  FROM [PHDATA_SBA].[dbo].[Saldos_Conta] a
+  where a.salfec='$salFecha' and a.cuenta = '$cuenta' and ccosto ='')
+
+  UPDATE [PHDATA_SBA].[dbo].[Saldos_Conta]
+	set
+	cargos=(SELECT ABS(sum(a.cargos + $cargo))
+	FROM [PHDATA_SBA].[dbo].[Saldos_Conta] a
+	where a.salfec = '$salFecha' and a.cuenta = '$cuenta' and ccosto =''),
+	abonos=(SELECT ABS(sum(a.abonos + $abono))
+	FROM [PHDATA_SBA].[dbo].[Saldos_Conta] a
+	where a.salfec = '$salFecha' and a.cuenta = '$cuenta' and ccosto =''),
+	saldo=(SELECT sum((a.abonos + $abono)-(a.cargos + $cargo))
+	FROM [PHDATA_SBA].[dbo].[Saldos_Conta] a
+	where a.salfec = '$salFecha' and a.cuenta = '$cuenta' and ccosto =''),
+	saldoMes=(SELECT sum((a.abonos + $abono)-(a.cargos + $cargo))
+	FROM [PHDATA_SBA].[dbo].[Saldos_Conta] a
+	where a.salfec = '$salFecha' and a.cuenta = '$cuenta' and ccosto ='')
+	where salfec = '$salFecha' and cuenta = '$cuenta' and ccosto =''
+
+ELSE
+	INSERT [PHDATA_SBA].[dbo].[Saldos_Conta] ([salfec], [cuenta], [ccosto], [ccosto2], [ccosto3], [saldoant], [cargos], [abonos], [saldo], [saldoMes], [codempre], [SaldoAntM2], [CargosM2], [AbonosM2], [SaldoM2], [SaldoMesM2])
+	VALUES (N'$salFecha', N'$cuenta', N'', N'', N'', CAST(0.00 AS Decimal(18, 2)), ABS(CAST($cargo AS Decimal(18, 2))), ABS(CAST($abono AS Decimal(18, 2))), CAST(($abono - $cargo) AS Decimal(18, 2)), CAST(($abono - $cargo) AS Decimal(18, 2)), NULL, 0, 0, 0, 0, 0)
